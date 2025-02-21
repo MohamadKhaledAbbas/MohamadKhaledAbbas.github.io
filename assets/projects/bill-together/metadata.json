@@ -1,0 +1,66 @@
+{
+    "id": "bill-together",
+    "title": "BillTogether",
+    "shortDescription": "A bill splitting app that helps groups manage expenses",
+    "thumbnail": "thumbnail.png",
+    "version": "1.0.0",
+    "releaseDate": "2025-02",
+    "technologies": [
+        "ReactNative",
+        "Expo",
+        "Supabase",
+        "PostgreSQL",
+        "MobX"
+    ],
+    "screenshots": [
+        {
+            "path": "screenshots/BillBalance.png",
+            "description": "What user owe others"
+        },
+        {
+            "path": "screenshots/BillDetails.png",
+            "description": "Bill Details Screen"
+        },
+        {
+            "path": "screenshots/CreateBill.png",
+            "description": "Create Bill Screen"
+        },
+        {
+            "path": "screenshots/Dashboard.png",
+            "description": "Main Dashboard"
+        },
+        {
+            "path": "screenshots/GroupDetails.png",
+            "description": "Group Details"
+        },
+        {
+            "path": "screenshots/GroupList.png",
+            "description": "Group List Screen"
+        },
+        {
+            "path": "screenshots/Login.png",
+            "description": "Login Page"
+        },
+        {
+            "path": "screenshots/Settings.png",
+            "description": "Settings Screen"
+        }
+    ],
+    "features": [
+        {
+            "title": "Feature 1",
+            "description": "Detailed description of feature 1"
+        },
+        {
+            "title": "Feature 2",
+            "description": "Detailed description of feature 2"
+        },
+        {
+            "title": "Feature 3",
+            "description": "Detailed description of feature 3"
+        }
+    ],
+    "downloads": {
+        "apk": "downloads/app-v1.0.0.apk"
+    }
+}
