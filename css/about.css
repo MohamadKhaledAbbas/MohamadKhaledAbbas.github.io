@@ -2,18 +2,37 @@
 .about-section {
     padding: 4rem 0;
     background-color: white;
-    min-height: 60vh;
+    min-height: 80vh;
 }
 
 .about-content {
     display: flex;
-    align-items: center;
-    gap: 2rem;
+    flex-direction: row-reverse;
+    align-items: flex-start;
+    gap: 3rem;
+}
+
+.about-image {
+    flex-shrink: 0;
 }
 
 .about-image img {
-    width: 200px;
-    height: 200px;
+    width: 250px;
+    height: 250px;
     border-radius: 50%;
     object-fit: cover;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border: 5px solid #f3f4f6;
+}
+
+.about-text {
+    flex-grow: 1;
+}
+
+@media (max-width: 768px) {
+    .about-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
 }

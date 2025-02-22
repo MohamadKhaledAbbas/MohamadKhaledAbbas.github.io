@@ -3,79 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - Android Developer</title>
+    <meta name="description" content="Contact MK Abbas - Android Developer. Get in touch for collaborations, inquiries, or just to say hello!">
+    <title>Contact MK Abbas - Android Developer</title>
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/contact.css">
     <link rel="stylesheet" href="css/utilities.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <header class="header">
-        <nav class="nav-container">
-            <button class="mobile-menu-btn">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <div class="nav-links">
-                <a href="index.html" class="nav-link ">Home</a>
-                <a href="about.html" class="nav-link">About</a>
-                <a href="contact.html" class="nav-link active">Contact</a>
-            </div>
-        </nav>
-    </header>
-
     <main>
         <section class="contact-section">
             <div class="container">
-                <h1>Get in Touch</h1>
-                <div class="contact-content">
+                <div class="contact-header">
+                    <h1 class="section-title">Let's Connect</h1>
+                </div>
+                <div class="contact-grid">
                     <div class="contact-info">
                         <h2>Contact Information</h2>
-                        <div class="info-item">
-                            <i class="fas fa-envelope"></i>
-                            <p>email@example.com</p>
-                        </div>
-                        <div class="info-item">
-                            <i class="fas fa-phone"></i>
-                            <p>+1 234 567 890</p>
-                        </div>
-                        <div class="info-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <p>City, Country</p>
-                        </div>
-                        <div class="social-links">
-                            <a href="https://github.com/yourusername" target="_blank" class="social-link">
-                                <i class="fab fa-github"></i>
-                            </a>
-                            <a href="https://linkedin.com/in/yourusername" target="_blank" class="social-link">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
-                            <a href="https://twitter.com/yourusername" target="_blank" class="social-link">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                        </div>
+                        <ul class="info-list">
+                            <li>
+                                <i class="fas fa-envelope" aria-hidden="true"></i>
+                                <a href="mailto:email@example.com">email@example.com</a>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone" aria-hidden="true"></i>
+                                <a href="tel:+12345678900">+1 234 567 890</a>
+                            </li>
+                            <li>
+                                <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                                <address>City, Country</address>
+                            </li>
+                        </ul>
+                        <h3>Connect with me</h3>
+                        <ul class="social-links">
+                            <li><a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a></li>
+                            <li><a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a></li>
+                            <li><a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-twitter"></i></a></li>
+                        </ul>
                     </div>
                     <div class="contact-form">
                         <h2>Send a Message</h2>
-                        <form id="contact-form">
+                        <form id="contact-form" novalidate>
                             <div class="form-group">
                                 <label for="name">Name</label>
-                                <input type="text" id="name" name="name" required>
+                                <input type="text" id="name" name="name" required aria-required="true">
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="email" id="email" name="email" required>
+                                <input type="email" id="email" name="email" required aria-required="true">
                             </div>
                             <div class="form-group">
                                 <label for="subject">Subject</label>
-                                <input type="text" id="subject" name="subject" required>
+                                <input type="text" id="subject" name="subject" required aria-required="true">
                             </div>
                             <div class="form-group">
                                 <label for="message">Message</label>
-                                <textarea id="message" name="message" rows="5" required></textarea>
+                                <textarea id="message" name="message" rows="5" required aria-required="true"></textarea>
                             </div>
-                            <button type="submit" class="submit-btn">Send Message</button>
+                            <button type="submit" class="btn btn-primary submit-btn">Send Message</button>
                         </form>
                     </div>
                 </div>
@@ -83,17 +68,7 @@
         </section>
     </main>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="social-links">
-                <a href="https://github.com/yourusername" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://linkedin.com/in/yourusername" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="https://twitter.com/yourusername" target="_blank"><i class="fab fa-twitter"></i></a>
-            </div>
-            <p>&copy; 2025 MK Abbas. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script src="js/main.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/contact-form-validation.js"></script>
 </body>
 </html>

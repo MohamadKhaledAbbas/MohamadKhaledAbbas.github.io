@@ -1,9 +1,0 @@
-This directory is for project images and screenshots. Please add:
-1. App screenshots
-2. Project logos
-3. Other relevant images
-
-Recommended image specifications:
-- Format: JPG or PNG
-- Resolution: At least 1200x800 pixels
-- File size: Optimize for web (usually under 300KB)

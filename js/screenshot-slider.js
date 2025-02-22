@@ -6,6 +6,7 @@ class ScreenshotSlider {
         this.currentIndex = 0;
         this.slideCount = this.slides.length;
         this.isAnimating = false;
+        this.transition = 'none';
 
         this.init();
     }

@@ -1,12 +1,56 @@
 /* Contact Page Styles */
+:root {
+    --card-bg: rgba(255, 255, 255, 0.95);
+    --card-border: 1px solid rgba(0, 0, 0, 0.1);
+    --card-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
 .contact-section {
     padding: 4rem 0;
-    background-color: white;
+    background-color: #f8f9fa;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4rem;
+    align-items: start;
+    padding: 2rem 0;
+}
+
+.contact-info {
+    background: var(--card-bg);
+    border: var(--card-border);
+    box-shadow: var(--card-shadow);
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+}
+
+.info-list li {
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.info-list i {
+    font-size: 1.2rem;
+    color: var(--accent-color);
 }
 
 .contact-form {
-    max-width: 600px;
+    max-width: 100%;
     margin: 0 auto;
+    background: var(--card-bg);
+    border: var(--card-border);
+    box-shadow: var(--card-shadow);
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
 }
 
 .contact-form input,
@@ -16,11 +60,34 @@
     margin-bottom: 1rem;
     border: 1px solid #ddd;
     border-radius: 4px;
+    box-sizing: border-box;
 }
 
 .contact-form textarea {
     height: 150px;
     resize: vertical;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background: #fff;
+    color: var(--text-color);
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
 .contact-form button {
@@ -35,4 +102,27 @@
 
 .contact-form button:hover {
     background-color: #1e40af;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 1rem;
+    background-color: #1d4ed8;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 768px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
 }
