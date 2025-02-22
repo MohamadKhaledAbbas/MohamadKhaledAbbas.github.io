@@ -51,27 +51,41 @@
     animation: fadeInUp 0.8s ease-out 0.4s backwards;
 }
 
+.hero-buttons a {
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.hero-buttons a:hover {
+    background-color: var(--bg-secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.hero-buttons a:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
 /* Projects Section */
 .projects-section {
-    background: var(--gray-50);
+    background: var(--bg-primary);
     padding: 8rem 0;
 }
 
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
-    padding: 1.5rem 0;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem 0;
     max-width: 1200px;
     margin: 0 auto;
 }
 
 .project-card {
-    background: var(--white);
-    border-radius: 12px;
+    background: var(--bg-secondary);
+    border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
     height: 100%;
     display: flex;
@@ -79,6 +93,7 @@
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.5s ease, transform 0.5s ease;
+    border: 2px solid var(--white);
 }
 
 .project-card.fade-in {
@@ -88,7 +103,7 @@
 
 .project-thumbnail {
     position: relative;
-    padding-top: 56.25%;
+    padding-top: 60%;
     overflow: hidden;
 }
 
@@ -103,85 +118,89 @@
 }
 
 .project-card:hover .project-thumbnail img {
-    transform: scale(1.05);
+    transform: scale(1.1);
 }
 
 .project-info {
-    padding: 1.25rem;
+    padding: 1.5rem;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
 }
 
 .project-info h3 {
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-    color: var(--gray-900);
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
 }
 
 .project-info p {
-    font-size: 0.9rem;
-    color: var(--gray-600);
-    margin-bottom: 1rem;
-    line-height: 1.5;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.25rem;
+    line-height: 1.6;
 }
 
+/* Tech Stack Enhancements */
 .tech-stack {
     display: flex;
+    gap: 0.75rem;
     flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
 }
 
-.tech-tag {
-    font-size: 0.75rem;
-    padding: 0.25rem 0.75rem;
-    background: var(--gray-100);
-    color: var(--gray-700);
-    border-radius: 12px;
-    transition: all 0.3s ease;
-    cursor: pointer;
+.tech-item {
+    background: var(--surface-primary);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    transition: var(--transition-default);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
 }
 
-.tech-tag:hover {
-    background: var(--primary-color);
-    color: var(--white);
+.tech-item:hover {
+    background: var(--accent-color);
+    color: var(--text-primary);
     transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .project-actions {
     margin-top: auto;
     display: flex;
-    gap: 0.75rem;
+    gap: 1rem;
 }
 
 .project-filters {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-bottom: 2rem;
-    padding: 0 1rem;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    padding: 0 1.5rem;
     justify-content: center;
 }
 
 .filter-btn {
-    padding: 0.5rem 1.25rem;
+    padding: 0.6rem 1.5rem;
     border: none;
-    border-radius: 20px;
-    background: var(--gray-100);
-    color: var(--gray-700);
-    font-size: 0.9rem;
+    border-radius: 25px;
+    background: var(--surface-primary);
+    color: var(--text-secondary);
+    font-size: 1rem;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .filter-btn:hover {
-    background: var(--gray-200);
+    background: var(--accent-color);
+    color: var(--text-primary);
     transform: translateY(-2px);
 }
 
 .filter-btn.active {
-    background: var(--primary-color);
-    color: var(--white);
+    background: var(--accent-color);
+    color: var(--text-primary);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }

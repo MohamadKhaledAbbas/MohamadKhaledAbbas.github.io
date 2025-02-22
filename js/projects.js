@@ -95,7 +95,7 @@ class ProjectManager {
                 <p>${project.shortDescription}</p>
                 <div class="tech-stack">
                     ${project.technologies.map(tech => `
-                        <span class="tech-tag" data-tech="${tech}">${tech}</span>
+                        <span class="tech-item" data-tech="${tech}">${tech}</span>
                     `).join('')}
                 </div>
                 <div class="project-actions">
@@ -112,7 +112,7 @@ class ProjectManager {
         `;
 
         // Add hover effect for tech tags
-        card.querySelectorAll('.tech-tag').forEach(tag => {
+        card.querySelectorAll('.tech-item').forEach(tag => {
             tag.addEventListener('click', (e) => {
                 e.preventDefault();
                 this.filterProjects(tag.dataset.tech);

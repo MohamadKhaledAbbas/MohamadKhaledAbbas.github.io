@@ -1,30 +1,34 @@
 .project-details-page {
     padding: 2rem 0;
-    background-color: #fff;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
 }
 
 .project-header {
     padding: 2rem;
-    background-color: #f3f4f6;
+    background-color: var(--bg-secondary);
     border-radius: 8px;
     margin-bottom: 2rem;
+    box-shadow: var(--shadow-default);
 }
 
 .project-header h1 {
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
+    color: var(--text-primary);
 }
 
 .project-meta span {
     display: inline-block;
     margin-right: 1rem;
-    color: #6b7280;
+    color: var(--text-secondary);
 }
 
 .project-content h2 {
     font-size: 1.75rem;
     margin-top: 2rem;
     margin-bottom: 1rem;
+    color: var(--text-primary);
 }
 
 .features-grid {
@@ -41,15 +45,15 @@
 .download-options a {
     display: inline-block;
     padding: 0.5rem 1rem;
-    background-color: #1d4ed8;
-    color: #fff;
+    background-color: var(--accent-color);
+    color: var(--text-primary);
     border-radius: 4px;
     text-decoration: none;
-    transition: background-color 0.3s;
+    transition: background-color var(--transition-default);
 }
 
 .download-options a:hover {
-    background-color: #1e40af;
+    background-color: var(--accent-hover);
 }
 
 @media (max-width: 768px) {

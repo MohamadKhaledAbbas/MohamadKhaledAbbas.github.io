@@ -1,13 +1,45 @@
-/* Utility Classes */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
+/* Mobile Menu Styles */
+.mobile-menu-btn {
+    display: none;
+    cursor: pointer;
+    z-index: 1001;
 }
 
-.text-center {
-    text-align: center;
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+    transition: all 0.3s ease;
 }
+@media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: block;
+    }
 
-.mt-1 { margin-top: 1rem; }
-.mb-1 { margin-bottom: 1rem; }
+    .nav-links {
+        position: fixed;
+        top: 60px;
+        top: 60px; /* Adjust based on your header height */
+        left: 0;
+        right: 0;
+        background-color: var(--bg-secondary);
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: max-height 0.3s ease, opacity 0.3s ease;
+    }
+
+    .nav-links.active {
+        max-height: 500px; /* Adjust based on your menu content */
+        opacity: 1;
+        padding: 1rem 0;
+    }
+
+    .nav-link {
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: opacity 0.3s ease 0.2s, transform 0.3s ease 0.2s;
+    }
+}
