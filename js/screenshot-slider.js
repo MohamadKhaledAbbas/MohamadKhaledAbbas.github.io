@@ -5,7 +5,7 @@ class ScreenshotSlider {
         this.slides = container.querySelectorAll('.screenshot-item');
         this.currentIndex = 0;
         this.slideCount = this.slides.length;
-        this.slidesPerView = this.getSlidesPerView();
+        this.isAnimating = false;
 
         this.init();
     }
@@ -19,19 +19,11 @@ class ScreenshotSlider {
         
         // Add event listeners
         window.addEventListener('resize', () => {
-            this.slidesPerView = this.getSlidesPerView();
             this.updateSlidePosition();
         });
 
         // Initial position
         this.updateSlidePosition();
-    }
-
-    getSlidesPerView() {
-        const width = window.innerWidth;
-        if (width <= 768) return 1;
-        if (width <= 1024) return 2;
-        return 3;
     }
 
     createNavigation() {
@@ -53,12 +45,10 @@ class ScreenshotSlider {
         const dotsContainer = document.createElement('div');
         dotsContainer.className = 'slider-dots';
         
-        const totalDots = Math.ceil(this.slideCount / this.slidesPerView);
-        
-        for (let i = 0; i < totalDots; i++) {
+        for (let i = 0; i < this.slideCount; i++) {
             const dot = document.createElement('div');
             dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
-            dot.addEventListener('click', () => this.goToSlide(i * this.slidesPerView));
+            dot.addEventListener('click', () => this.goToSlide(i));
             dotsContainer.appendChild(dot);
         }
 
@@ -67,34 +57,43 @@ class ScreenshotSlider {
     }
 
     updateDots() {
-        const activeDotIndex = Math.floor(this.currentIndex / this.slidesPerView);
         this.dots.forEach((dot, index) => {
-            dot.classList.toggle('active', index === activeDotIndex);
+            dot.classList.toggle('active', index === this.currentIndex);
         });
     }
 
     slide(direction) {
+        if (this.isAnimating) return;
+
+        this.isAnimating = true;
+
         if (direction === 'next') {
-            if (this.currentIndex < this.slideCount - this.slidesPerView) {
-                this.currentIndex++;
+            this.currentIndex++;
+            if (this.currentIndex >= this.slideCount) {
+                this.currentIndex = 0;
             }
         } else {
-            if (this.currentIndex > 0) {
-                this.currentIndex--;
+            this.currentIndex--;
+            if (this.currentIndex < 0) {
+                this.currentIndex = this.slideCount - 1;
             }
         }
 
         this.updateSlidePosition();
+        this.isAnimating = false;
     }
 
     goToSlide(index) {
-        this.currentIndex = Math.min(Math.max(index, 0), this.slideCount - this.slidesPerView);
+        if (this.isAnimating) return;
+
+        this.currentIndex = index % this.slideCount;
         this.updateSlidePosition();
     }
 
-    updateSlidePosition() {
-        const slideWidth = 100 / this.slidesPerView;
+    updateSlidePosition(skipAnimation = false) {
+        const slideWidth = 100;
         const offset = -this.currentIndex * slideWidth;
+        this.slideContainer.style.transition = skipAnimation ? 'none' : 'transform 0.3s';
         this.slideContainer.style.transform = `translateX(${offset}%)`;
         this.updateDots();
     }

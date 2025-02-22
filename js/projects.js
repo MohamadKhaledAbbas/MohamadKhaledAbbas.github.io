@@ -99,7 +99,7 @@ class ProjectManager {
                     `).join('')}
                 </div>
                 <div class="project-actions">
-                    <a href="./projects/project-details.html?id=${project.id}" class="btn btn-primary">
+                    <a href="./project-details.html?id=${project.id}" class="btn btn-primary">
                         <i class="fas fa-info-circle"></i> Details
                     </a>
                     ${project.demoUrl ? `

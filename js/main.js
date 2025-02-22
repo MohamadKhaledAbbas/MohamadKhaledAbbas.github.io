@@ -86,6 +86,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Mobile Menu Toggle
+    const mobileMenuButton = document.querySelector('.mobile-menu-btn');
+    const navLinkss = document.querySelector('.nav-links');
+
+    mobileMenuButton.addEventListener('click', () => {
+        navLinkss.classList.toggle('visible');
+    });
+
     // Header scroll effect
     let lastScroll = 0;
     window.addEventListener('scroll', () => {

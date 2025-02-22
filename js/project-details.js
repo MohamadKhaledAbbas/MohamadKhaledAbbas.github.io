@@ -66,8 +66,8 @@ class ProjectDetails {
         if (!screenshots || screenshots.length === 0) return;
 
         const container = document.getElementById('screenshots-container');
-        container.innerHTML = screenshots.map((screenshot, index) => `
-            <div class="screenshot-item ${index === 0 ? 'active' : ''}">
+        container.innerHTML = screenshots.map((screenshot) => `
+            <div class="screenshot-item">
                 <img src="../assets/projects/${this.projectId}/${screenshot.path}" 
                      alt="${screenshot.description || ''}"
                      loading="lazy">

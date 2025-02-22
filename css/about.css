@@ -1,0 +1,19 @@
+/* About Page Styles */
+.about-section {
+    padding: 4rem 0;
+    background-color: white;
+    min-height: 60vh;
+}
+
+.about-content {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.about-image img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+}

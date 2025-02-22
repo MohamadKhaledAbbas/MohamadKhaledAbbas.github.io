@@ -1,0 +1,71 @@
+.project-details-page {
+    padding: 2rem 0;
+    background-color: #fff;
+}
+
+.project-header {
+    padding: 2rem;
+    background-color: #f3f4f6;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+
+.project-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.project-meta span {
+    display: inline-block;
+    margin-right: 1rem;
+    color: #6b7280;
+}
+
+.project-content h2 {
+    font-size: 1.75rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.download-section {
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.download-options a {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #1d4ed8;
+    color: #fff;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.download-options a:hover {
+    background-color: #1e40af;
+}
+
+@media (max-width: 768px) {
+    .project-header {
+        padding: 1rem;
+    }
+
+    .project-header h1 {
+        font-size: 2rem;
+    }
+
+    .project-meta span {
+        margin-right: 0.5rem;
+    }
+
+    .project-content h2 {
+        font-size: 1.5rem;
+    }
+}
