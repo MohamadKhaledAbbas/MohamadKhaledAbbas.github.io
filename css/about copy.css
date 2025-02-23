@@ -1,0 +1,41 @@
+.about-section {
+    padding: 5rem 0;
+    background-color: var(--bg-primary);
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px; /* Added for rounding */
+}
+
+.about-image {
+    width: 150px; /* Reduced size */
+    height: 150px; /* Reduced size */
+    border-radius: 50%; /* Keep it circular */
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4); /* Reduced shadow */
+    border: 4px solid var(--accent-color); /* Reduced border size */
+    transition: 0.5s ease;
+    margin: 0 auto 2rem; /* Adjusted margin */
+}
+
+.skills-grid {
+    margin-top: 2.5rem; /* Reduced margin */
+}
+
+.skills-grid h3 {
+    margin-bottom: 1.5rem; /* Reduced margin */
+    font-size: 1.5rem; /* Reduced font size */
+}
+
+.timeline-content h3 {
+    font-size: 1.5rem; /* Reduced font size */
+}
+
+.timeline-content h4 {
+    font-size: 1.2rem; /* Reduced font size */
+}
+
+.language-list li {
+    padding: 1rem 1.5rem; /* Reduced padding */
+    font-size: 1rem; /* Reduced font size */
+}

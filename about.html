@@ -3,71 +3,220 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Me</title>
-    <link rel="stylesheet" href="css/utilities.css">
+    <title>About - Khaled Abbas</title>
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/about.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <script src="js/components.js"></script>
-    <script src="js/main.js"></script>
-    <main id="about-main">
-        <section class="about-section">
-            <div class="container">
-                <div class="about-content">
-                    <div class="about-image" id="about-image"></div>
-                    <div class="about-text" id="about-text"></div>
-                </div>
-            </div>
-        </section>
-    </main>
-    <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            try {
-                const response = await fetch('assets/profile.json');
-                const profileData = await response.json();
+    <nav class="navbar">
+        <!-- Your existing navigation -->
+    </nav>
 
-                document.getElementById('about-image').innerHTML = `
-                    <img src="${profileData.image}" alt="${profileData.name}" loading="lazy">
-                `;
-
-                let skillsHtml = '';
-                profileData.skills.forEach(skill => {
-                    skillsHtml += `
-                        <div class="skill-category">
-                            <h3><i class="${skill.icon}"></i> ${skill.name}</h3>
-                            <ul>${skill.items.map(item => `<li>${item}</li>`).join('')}</ul>
-                        </div>
-                    `;
-                });
-
-                let timelineHtml = '';
-                profileData.timeline.forEach(event => {
-                    timelineHtml += `
-                        <div class="timeline-item">
-                            <div class="timeline-content">
-                                <h3>${event.title}</h3>
-                                <p class="timeline-date"><i class="far fa-calendar-alt"></i> ${event.date}</p>
-                                <p>${event.description}</p>
+    <main class="about-section">
+        <div class="container">
+            <header class="about-header">
+                <div class="profile-container">
+                    <div class="profile-image">
+                        <img src="assets/profile-image.jpg" alt="Khaled Abbas" id="profile-img">
+                    </div>
+                    <div class="profile-details">
+                        <h1 class="profile-name">About Me</h1>
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <i class="fas fa-envelope" aria-hidden="true"></i>
+                                <span>${profile.contact.email}</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fab fa-linkedin" aria-hidden="true"></i>
+                                <a href="${profile.contact.linkedin}" target="_blank" rel="noopener noreferrer">LinkedIn Profile</a>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </header>
+
+            <section class="summary">
+                <h2>Professional Summary</h2>
+                <p>${profile.summary}</p>
+            </section>
+
+            <section class="education">
+                <h2>Education</h2>
+                <div class="education-card">
+                    <h3>${profile.education.degree}</h3>
+                    <p>${profile.education.university}</p>
+                    <p>GPA: ${profile.education.gpa}</p>
+                </div>
+            </section>
+
+            <section class="experience">
+                <h2>Work Experience</h2>
+                <div class="timeline">
+                    <!-- Experience items will be dynamically added here -->
+                </div>
+            </section>
+
+            <section class="skills-container">
+                <h2>Skills</h2>
+                <div class="skills-grid">
+                    <div class="technical-skills">
+                        <h3>Technical Skills</h3>
+                        <ul>
+                            <!-- Technical skills will be dynamically added here -->
+                        </ul>
+                    </div>
+                    <div class="soft-skills">
+                        <h3>Soft Skills</h3>
+                        <ul>
+                            <!-- Soft skills will be dynamically added here -->
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="languages">
+                <h2>Languages</h2>
+                <ul class="language-list">
+                    <!-- Languages will be dynamically added here -->
+                </ul>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        async function loadProfile() {
+            try {
+                const response = await fetch('assets/profile.json');
+                const profile = await response.json();
+                
+                // Set profile image
+                document.getElementById('profile-img').src = profile.imageUrl;
+
+                // Populate contact info
+                const contactInfo = document.querySelector('.contact-info');
+                contactInfo.innerHTML = `
+                    <div class="contact-item">
+                        <i class="fas fa-phone" aria-hidden="true"></i>
+                        <span>${profile.contact.phone}</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                        <span>${profile.contact.email}</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-linkedin" aria-hidden="true"></i>
+                        <a href="${profile.contact.linkedin}" target="_blank" rel="noopener noreferrer">LinkedIn Profile</a>
+                    </div>
+                `;
+
+                // Populate summary
+                const summarySection = document.querySelector('.summary');
+                summarySection.innerHTML = `
+                    <h2>Professional Summary</h2>
+                    <p class="summary-text">${profile.summary}</p>
+                `;
+
+                // Populate education
+                const educationCard = document.querySelector('.education-card');
+                educationCard.innerHTML = `
+                    <h3 class="degree">${profile.education.degree}</h3>
+                    <p class="university">${profile.education.university}</p>
+                    <p class="gpa">GPA: <span>${profile.education.gpa}</span></p>
+                `;
+
+                // Populate experience
+                const timeline = document.querySelector('.timeline');
+                profile.experience.forEach(exp => {
+                    const expElement = document.createElement('div');
+                    expElement.className = 'timeline-item';
+                    expElement.innerHTML = `
+                        <div class="timeline-content">
+                            <h3>${exp.position}</h3>
+                            <h4>${exp.company} ${exp.location? ' - ' + exp.location : ''}</h4>
+                            <p class="duration">${exp.duration}</p>
+                            <ul>
+                                ${exp.responsibilities.map(resp => `<li>${resp}</li>`).join('')}
+                            </ul>
+                        </div>
                     `;
+                    timeline.appendChild(expElement);
                 });
 
-                document.getElementById('about-text').innerHTML = `
-                    <h1 class="section-title">About Me</h1>
-                    <p class="lead">${profileData.title}</p>
-                    <p>${profileData.description}</p>
-                    <h2 class="section-subtitle">Skills & Expertise</h2>
-                    <div class="skills-grid">${skillsHtml}</div>
-                    <h2 class="section-subtitle">Professional Journey</h2>
-                    <div class="timeline">${timelineHtml}</div>
-                `;
+                // Populate skills
+                // Populate technical skills
+                const technicalSkillsContainer = document.querySelector('.technical-skills');
+                const technicalSkillsList = document.createElement('div');
+                technicalSkillsList.className = 'skills-grid';
+                
+                for (let i = 0; i < profile.skills.technical.length; i += 4) {
+                    const row = document.createElement('div');
+                    row.className = 'skills-row';
+                    
+                    for (let j = i; j < i + 4 && j < profile.skills.technical.length; j++) {
+                        const skill = profile.skills.technical[j];
+                        const skillItem = document.createElement('div');
+                        skillItem.className = 'skill-item';
+                        skillItem.innerHTML = `
+                            <span class="skill-name">${skill}</span>
+                            <div style="width: ${profile.skills.technical[skill]}%"></div>
+                        `;
+                        row.appendChild(skillItem);
+                    }
+                    
+                    technicalSkillsList.appendChild(row);
+                }
+                
+                technicalSkillsContainer.appendChild(technicalSkillsList);
+
+                // Populate soft skills
+                const softSkillsContainer = document.querySelector('.soft-skills');
+                const softSkillsList = document.createElement('div');
+                
+                for (let i = 0; i < profile.skills.soft.length; i += 4) {
+                    const row = document.createElement('div');
+                    row.className = 'skills-row';
+                    
+                    for (let j = i; j < i + 4 && j < profile.skills.soft.length; j++) {
+                        const skill = profile.skills.soft[j];
+                        const skillItem = document.createElement('div');
+                        skillItem.className = 'soft-skill-item';
+                        skillItem.innerHTML = `
+                            <span class="skill-name">${skill}</span>
+                            <div></div>
+                        `;
+                        row.appendChild(skillItem);
+                    }
+                    
+                    softSkillsList.appendChild(row);
+                }
+                
+                softSkillsContainer.appendChild(softSkillsList);
+
+                // Populate languages
+                const languagesContainer = document.querySelector('.languages');
+                const languageList = document.createElement('ul');
+                languageList.className = 'language-list';
+                profile.languages.forEach(lang => {
+                    const li = document.createElement('div');
+                    li.className = 'language-item';
+                    li.innerHTML = `
+                        <span class="language-name">${lang.name}</span>
+                        <div class="language-level-bar">
+                            <div class="language-level-fill" style="width: ${lang.levelPercentage}%"></div>
+                        </div>
+                        <span class="language-level">${lang.level}</span>
+                    `;
+                    languageList.appendChild(li);
+                });
+                languagesContainer.appendChild(languageList);
+
             } catch (error) {
-                console.error('Error fetching profile data:', error);
+                console.error('Error loading profile:', error);
             }
-        });
+        }
+
+        document.addEventListener('DOMContentLoaded', loadProfile);
     </script>
 </body>
 </html>
