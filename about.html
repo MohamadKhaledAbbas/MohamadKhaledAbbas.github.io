@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Me - Android Developer</title>
+    <title>About Me</title>
     <link rel="stylesheet" href="css/utilities.css">
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/about.css">
@@ -11,71 +11,63 @@
 </head>
 <body>
     <script src="js/components.js"></script>
-    <main>
+    <script src="js/main.js"></script>
+    <main id="about-main">
         <section class="about-section">
             <div class="container">
                 <div class="about-content">
-                    <div class="about-image">
-                        <img src="assets/images/profile.jpg" alt="MK Abbas - Android Developer" loading="lazy">
-                    </div>
-                    <div class="about-text">
-                        <h1 class="section-title">About Me</h1>
-                        <p class="lead">Android Developer & Mobile App Specialist</p>
-                        <p>I am a passionate Android developer with expertise in creating innovative and user-friendly mobile applications. With a strong foundation in Kotlin and modern Android development practices, I strive to deliver high-quality solutions that make a difference.</p>
-                        
-                        <h2 class="section-subtitle">Skills & Expertise</h2>
-                        <div class="skills-grid">
-                            <div class="skill-category">
-                                <h3><i class="fas fa-code"></i> Languages</h3>
-                                <ul>
-                                    <li>Kotlin</li>
-                                    <li>Java</li>
-                                    <li>SQL</li>
-                                </ul>
-                            </div>
-                            <div class="skill-category">
-                                <h3><i class="fas fa-layer-group"></i> Frameworks & Libraries</h3>
-                                <ul>
-                                    <li>Android SDK</li>
-                                    <li>Jetpack Compose</li>
-                                    <li>Room Database</li>
-                                    <li>Retrofit</li>
-                                    <li>Coroutines</li>
-                                </ul>
-                            </div>
-                            <div class="skill-category">
-                                <h3><i class="fas fa-tools"></i> Tools & Platforms</h3>
-                                <ul>
-                                    <li>Android Studio</li>
-                                    <li>Git</li>
-                                    <li>Firebase</li>
-                                    <li>Google Play Console</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <h2 class="section-subtitle">Professional Journey</h2>
-                        <div class="timeline">
-                            <div class="timeline-item">
-                                <div class="timeline-content">
-                                    <h3>Senior Android Developer</h3>
-                                    <p class="timeline-date"><i class="far fa-calendar-alt"></i> 2023 - Present</p>
-                                    <p>Leading development of innovative mobile applications and mentoring junior developers.</p>
-                                </div>
-                            </div>
-                            <div class="timeline-item">
-                                <div class="timeline-content">
-                                    <h3>Android Developer</h3>
-                                    <p class="timeline-date"><i class="far fa-calendar-alt"></i> 2020 - 2023</p>
-                                    <p>Developed and maintained multiple successful Android applications.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="about-image" id="about-image"></div>
+                    <div class="about-text" id="about-text"></div>
                 </div>
             </div>
         </section>
     </main>
-    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const response = await fetch('assets/profile.json');
+                const profileData = await response.json();
+
+                document.getElementById('about-image').innerHTML = `
+                    <img src="${profileData.image}" alt="${profileData.name}" loading="lazy">
+                `;
+
+                let skillsHtml = '';
+                profileData.skills.forEach(skill => {
+                    skillsHtml += `
+                        <div class="skill-category">
+                            <h3><i class="${skill.icon}"></i> ${skill.name}</h3>
+                            <ul>${skill.items.map(item => `<li>${item}</li>`).join('')}</ul>
+                        </div>
+                    `;
+                });
+
+                let timelineHtml = '';
+                profileData.timeline.forEach(event => {
+                    timelineHtml += `
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <h3>${event.title}</h3>
+                                <p class="timeline-date"><i class="far fa-calendar-alt"></i> ${event.date}</p>
+                                <p>${event.description}</p>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                document.getElementById('about-text').innerHTML = `
+                    <h1 class="section-title">About Me</h1>
+                    <p class="lead">${profileData.title}</p>
+                    <p>${profileData.description}</p>
+                    <h2 class="section-subtitle">Skills & Expertise</h2>
+                    <div class="skills-grid">${skillsHtml}</div>
+                    <h2 class="section-subtitle">Professional Journey</h2>
+                    <div class="timeline">${timelineHtml}</div>
+                `;
+            } catch (error) {
+                console.error('Error fetching profile data:', error);
+            }
+        });
+    </script>
 </body>
 </html>

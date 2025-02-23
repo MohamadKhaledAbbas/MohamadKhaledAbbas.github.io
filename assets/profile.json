@@ -1,0 +1,30 @@
+{
+    "name": "Khaled Abbas",
+    "image": "assets/images/profile.jpg",
+    "title": "Android Developer",
+    "description": "Over 6 years of expertise in both Android Native and Cross-Platform development",
+    "skills": [
+        {
+            "name": "Mobile Development",
+            "icon": "fas fa-mobile-alt",
+            "items": ["Android", "React Native", "Flutter"]
+        },
+        {
+            "name": "Backend Development",
+            "icon": "fas fa-server",
+            "items": ["Node.js", "Express", "MongoDB"]
+        }
+    ],
+    "timeline": [
+        {
+            "title": "Started at Company ABC",
+            "date": "2020-01",
+            "description": "Worked on various mobile applications with a focus on user experience."
+        },
+        {
+            "title": "Promoted to Senior Developer",
+            "date": "2023-05",
+            "description": "Led a team of developers to build cutting-edge mobile solutions."
+        }
+    ]
+}
