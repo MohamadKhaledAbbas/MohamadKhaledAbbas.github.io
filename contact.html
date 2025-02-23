@@ -25,22 +25,7 @@
                 <div class="contact-grid">
                     <div class="contact-info">
                         <h2>Contact Information</h2>
-                        <ul class="info-list">
-                            <li>
-                                <i class="fas fa-envelope" aria-hidden="true"></i>
-                                <a href="mailto:mh.khaled.abas@gmail.com" class="info-link">Email</a>
-                            </li>
-                            <li>
-                                <i class="fab fa-linkedin" aria-hidden="true"></i>
-                                <a href="https://www.linkedin.com/in/mhd-khaled-abbas/" target="_blank"
-                                    class="info-link">LinkedIn</a>
-                            </li>
-                            <li>
-                                <i class="fab fa-facebook" aria-hidden="true"></i>
-                                <a href="https://www.facebook.com/share/12EaTBo3Q3M/" target="_blank"
-                                    class="info-link">Facebook</a>
-                            </li>
-                        </ul>
+                        <!-- Profile information will be added here using JavaScript -->
                     </div>
                     <div class="contact-form">
                         <h2>Send a Message</h2>
@@ -70,6 +55,46 @@
     </main>
 
     <script src="js/contact-form-validation.js"></script>
+    <script>
+        function loadContactInfo() {
+            const profileContainer = document.querySelector('.contact-info');
+            if (profileContainer) {
+                fetch('assets/profile.json')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(profile => {
+                        const contactLinks = [
+                            { icon: 'fas fa-envelope', text: 'Email', href: `mailto:${profile.contact.email}` },
+                            { icon: 'fab fa-linkedin', text: 'LinkedIn', href: profile.contact.linkedin },
+                            { icon: 'fab fa-facebook', text: 'Facebook', href: profile.contact.facebook }
+                        ];
+
+                        const contactList = contactLinks.map(link => `
+                            <li>
+                                <i class="${link.icon}" aria-hidden="true"></i>
+                                <a href="${link.href}" target="_blank" rel="noopener noreferrer" class="info-link">${link.text}</a>
+                            </li>
+                        `).join('');
+
+                        profileContainer.innerHTML = `
+                            <h2>Contact Information</h2>
+                            <ul class="info-list">
+                                ${contactList}
+                            </ul>
+                        `;
+                    })
+                    .catch(error => {
+                        console.error('Error loading profile:', error);
+                        profileContainer.innerHTML = '<p>Error loading contact information. Please try again later.</p>';
+                    });
+            }
+        }
+        loadContactInfo();
+    </script>
 </body>
 
 </html>

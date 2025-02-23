@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,29 +10,14 @@
     <link rel="stylesheet" href="css/utilities.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <body>
     <script src="js/components.js"></script>
-    
+
     <main class="about-section">
         <div class="container">
             <header class="about-header">
                 <div class="profile-container">
-                    <div class="profile-image">
-                        <img src="assets/profile-image.jpg" alt="Khaled Abbas" id="profile-img">
-                    </div>
-                    <div class="profile-details">
-                        <h1 class="profile-name">About Me</h1>
-                        <div class="contact-info">
-                            <div class="contact-item">
-                                <i class="fas fa-envelope" aria-hidden="true"></i>
-                                <span>${profile.contact.email}</span>
-                            </div>
-                            <div class="contact-item">
-                                <i class="fab fa-linkedin" aria-hidden="true"></i>
-                                <a href="${profile.contact.linkedin}" target="_blank" rel="noopener noreferrer">LinkedIn Profile</a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </header>
 
@@ -88,26 +74,27 @@
             try {
                 const response = await fetch('assets/profile.json');
                 const profile = await response.json();
-                
-                // Set profile image
-                document.getElementById('profile-img').src = profile.imageUrl;
 
-                // Populate contact info
-                const contactInfo = document.querySelector('.contact-info');
-                contactInfo.innerHTML = `
-                    <div class="contact-item">
-                        <i class="fas fa-phone" aria-hidden="true"></i>
-                        <span>${profile.contact.phone}</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-envelope" aria-hidden="true"></i>
-                        <span>${profile.contact.email}</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fab fa-linkedin" aria-hidden="true"></i>
-                        <a href="${profile.contact.linkedin}" target="_blank" rel="noopener noreferrer">LinkedIn Profile</a>
-                    </div>
-                `;
+                // Set profile image and populate profile container
+                const profileContainer = document.querySelector('.profile-container');
+                if (profileContainer) {
+                    profileContainer.innerHTML = `
+                        <div class="profile-image">
+                            <img src="${profile.imageUrl}" alt="${profile.name}" id="profile-img">
+                        </div>
+                        <h1 class="profile-name">About Me</h1>
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <i class="fas fa-envelope" aria-hidden="true"></i>
+                                <span>${profile.contact.email}</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fab fa-linkedin" aria-hidden="true"></i>
+                                <a href="${profile.contact.linkedin}" target="_blank" rel="noopener noreferrer">LinkedIn Profile</a>
+                            </div>
+                        </div>
+                    `;
+                }
 
                 // Populate summary
                 const summarySection = document.querySelector('.summary');
@@ -132,7 +119,7 @@
                     expElement.innerHTML = `
                         <div class="timeline-content">
                             <h3>${exp.position}</h3>
-                            <h4>${exp.company} ${exp.location? ' - ' + exp.location : ''}</h4>
+                            <h4>${exp.company} ${exp.location ? ' - ' + exp.location : ''}</h4>
                             <p class="duration">${exp.duration}</p>
                             <ul>
                                 ${exp.responsibilities.map(resp => `<li>${resp}</li>`).join('')}
@@ -147,11 +134,11 @@
                 const technicalSkillsContainer = document.querySelector('.technical-skills');
                 const technicalSkillsList = document.createElement('div');
                 technicalSkillsList.className = 'skills-grid';
-                
+
                 for (let i = 0; i < profile.skills.technical.length; i += 4) {
                     const row = document.createElement('div');
                     row.className = 'skills-row';
-                    
+
                     for (let j = i; j < i + 4 && j < profile.skills.technical.length; j++) {
                         const skill = profile.skills.technical[j];
                         const skillItem = document.createElement('div');
@@ -162,20 +149,20 @@
                         `;
                         row.appendChild(skillItem);
                     }
-                    
+
                     technicalSkillsList.appendChild(row);
                 }
-                
+
                 technicalSkillsContainer.appendChild(technicalSkillsList);
 
                 // Populate soft skills
                 const softSkillsContainer = document.querySelector('.soft-skills');
                 const softSkillsList = document.createElement('div');
-                
+
                 for (let i = 0; i < profile.skills.soft.length; i += 4) {
                     const row = document.createElement('div');
                     row.className = 'skills-row';
-                    
+
                     for (let j = i; j < i + 4 && j < profile.skills.soft.length; j++) {
                         const skill = profile.skills.soft[j];
                         const skillItem = document.createElement('div');
@@ -186,10 +173,10 @@
                         `;
                         row.appendChild(skillItem);
                     }
-                    
+
                     softSkillsList.appendChild(row);
                 }
-                
+
                 softSkillsContainer.appendChild(softSkillsList);
 
                 // Populate languages
@@ -218,4 +205,5 @@
         document.addEventListener('DOMContentLoaded', loadProfile);
     </script>
 </body>
+
 </html>

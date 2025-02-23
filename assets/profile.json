@@ -3,9 +3,9 @@
     "title": "Android Developer",
     "imageUrl": "assets/images/profile.jpg",
     "contact": {
-        "phone": "+060-182645136",
         "email": "mh.khaled.abas@gmail.com",
-        "linkedin": "https://www.linkedin.com/in/mhd-khaled-abbas/"
+        "linkedin": "https://www.linkedin.com/in/mhd-khaled-abbas/",
+        "facebook": "https://www.facebook.com/share/12EaTBo3Q3M/"
     },
     "summary": "Energetic Team player Android Developer with 6+ years of experience in Android Native, Java, Kotlin, and Flutter.",
     "education": {
