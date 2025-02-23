@@ -327,9 +327,5 @@
     .skills-grid {
         grid-template-columns: 1fr;
     }
-    
-    .profile-container {
-        flex-direction: column;
-        text-align: center;
-    }
+
 }
