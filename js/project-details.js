@@ -44,9 +44,9 @@ class ProjectDetails {
         if (project.features && project.features.length > 0) {
             const featuresContainer = document.getElementById('features-list');
             featuresContainer.innerHTML = project.features.map(feature => `
-                <div class="bg-gray-800 rounded-lg p-4 shadow-md">
-                    <h3 class="text-xl font-semibold mb-2 text-blue-400">${feature.title}</h3>
-                    <p class="text-gray-300">${feature.description}</p>
+                <div class="bg-gray-700 rounded-lg p-6 shadow-lg border border-blue-400 hover:border-blue-300 transition-colors duration-300">
+                    <h3 class="text-2xl font-bold mb-3 text-blue-300">${feature.title}</h3>
+                    <p class="text-gray-200">${feature.description}</p>
                 </div>
             `).join('');
         }
