@@ -21,6 +21,7 @@ class ProjectManager {
             const data = await response.json();
             this.projects = data.projects;
             await this.displayProjects();
+            await this.displayCredits(this.projects);
         } catch (error) {
             console.error('Error loading projects:', error);
             this.showError('Failed to load projects. Please try again later.');
@@ -152,6 +153,31 @@ class ProjectManager {
         this.projectsContainer.innerHTML = '';
         this.projectsContainer.appendChild(projectGrid);
         this.setupAnimations();
+    }
+
+    async displayCredits(projects) {
+        const creditsContainer = document.getElementById('credits-list');
+        const creditsMap = new Map();
+    
+        projects.forEach(project => {
+            if (project.credits) {
+                project.credits.forEach(credit => {
+                    if (!creditsMap.has(credit.url)) {
+                        creditsMap.set(credit.url, credit);
+                    }
+                });
+            }
+        });
+    
+    
+        creditsContainer.innerHTML = '<h3 class="text-lg font-bold mb-2 text-blue-400">Image Credits</h3>';
+        creditsContainer.innerHTML += Array.from(creditsMap.values()).map(credit => `
+            <div class="credit-item">
+                <div>
+                    ${credit.url}
+                </div>
+            </div>
+        `).join('');
     }
 
     showError(message) {

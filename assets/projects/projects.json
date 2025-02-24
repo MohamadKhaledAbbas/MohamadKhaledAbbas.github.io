@@ -2,8 +2,8 @@
     "projects": [
         {
             "id": "bill-together",
-            "title": "BillTogether",
-            "shortDescription": "A bill splitting app that helps groups manage expenses",
+            "title": "Bill Together",
+            "shortDescription": "An app for managing group expenses and splitting bills",
             "thumbnail": "thumbnail.png",
             "technologies": [
                 "ReactNative",
@@ -12,7 +12,52 @@
                 "PostgreSQL",
                 "MobX"
             ],
+            "credits": [
+                {
+                    "resource": "Thumbnail image",
+                    "author": "noomtah",
+                    "url": "<a href=\"https://www.flaticon.com/free-icons/shareholder\" title=\"shareholder icons\">Shareholder icons created by noomtah - Flaticon</a>"
+                }
+            ],
             "featured": true
+        },
+        {
+            "id": "medical-app",
+            "title": "Medical App",
+            "shortDescription": "A medical app to help managing users medical records",
+            "thumbnail": "thumbnail.png",
+            "technologies": [
+                "Android Native",
+                "Java",
+                "RESTful API",
+                "C++"
+            ],
+            "credits": [
+                {
+                    "resource": "Thumbnail image",
+                    "author": "RaftelDesign",
+                    "url": "<a href=\"https://www.flaticon.com/free-icons/patient\" title=\"patient icons\">Patient icons created by RaftelDesign - Flaticon</a>"
+                }
+            ],
+            "featured": false
+        },
+        {
+            "id":"razer-installment",
+            "title":"Razer Installment",
+            "shortDescription":"An installment management app for Razer",
+            "thumbnail":"thumbnail.png",
+            "technologies":[
+                "Android Native",
+                "NDK",
+                "Java",
+                "C++"
+            ],
+            "credits":[
+                {
+                    "url": "https://www.flaticon.com/free-icons/calendar\" title=\"calendar icons\">Calendar icons created by Freepik - Flaticon</a>"
+                }
+            ],
+            "featured": false
         }
     ]
 }

@@ -1,0 +1,54 @@
+{
+    "id": "razer-installment",
+    "title": "Razer Installment",
+    "shortDescription": "An installment management app for Razer",
+    "thumbnail": "thumbnail.png",
+    "version": "1.0.0",
+    "releaseDate": "2025-02",
+    "technologies": [
+        "Android Native",
+        "NDK",
+        "Java",
+        "C++"
+    ],
+    "screenshots": [
+        {
+            "path": "screenshots/Installment_Sale.png",
+            "description": "Installment Sale"
+        },
+        {
+            "path": "screenshots/Installment_Void.png",
+            "description": "Installment Void"
+        },
+        {
+            "path": "screenshots/RazerInstallmentFeature.png",
+            "description": "Razer Installment Feature"
+        },
+        {
+            "path": "screenshots/RazerInstallmentFolderGroup.png",
+            "description": "Razer Installment Folder Group"
+        }
+    ],
+    "features": [
+        {
+            "title": "Installment Sale Management",
+            "description": "Easily create and process installment sales for Razer products"
+        },
+        {
+            "title": "Installment Void Functionality",
+            "description": "Securely void installment transactions when necessary"
+        },
+        {
+            "title": "Receipt Printing",
+            "description": "Generate and print detailed receipts for all installment transactions"
+        },
+        {
+            "title": "Transaction History",
+            "description": "Access a comprehensive history of all installment sales and voids"
+        },
+        {
+            "title": "Secure Data Handling",
+            "description": "Ensure all transaction data is securely stored and processed"
+        }
+    ]
+}

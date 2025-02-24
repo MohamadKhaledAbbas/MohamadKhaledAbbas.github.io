@@ -1,0 +1,57 @@
+{
+    "id": "medical-app",
+    "title": "Medical App",
+    "shortDescription": "A medical app to help managing users medical records",
+    "thumbnail": "thumbnail.png",
+    "version": "1.0.0",
+    "releaseDate": "2025-02",
+    "technologies": [
+        "Android Native",
+        "Java",
+        "C++"
+    ],
+    "screenshots": [
+        {
+            "path": "screenshots/ASPMedicalMainScreen.png",
+            "description": "Main Screen"
+        },
+        {
+            "path": "screenshots/ControlPanelFirst.png",
+            "description": "Control Panel First Part"
+        },
+        {
+            "path": "screenshots/ControlPanelSecondPart.png",
+            "description": "Control Panel Second Part"
+        },
+        {
+            "path": "screenshots/DentalDischargeInputs.png",
+            "description": "Dental Discharge Inputs"
+        },
+        {
+            "path": "screenshots/DentalMenu.png",
+            "description": "Dental Menu"
+        },
+        {
+            "path": "screenshots/HospitalMenu.png",
+            "description": "Hospital Menu"
+        }
+    ],
+    "features": [
+        {
+            "title": "Dental and Hospital Record Management",
+            "description": "Easily record and manage both dental and hospital visits, including admissions and discharges"
+        },
+        {
+            "title": "Flexible Module Configuration",
+            "description": "Configure the app to use dental, hospital, or both modules based on the healthcare provider's needs"
+        },
+        {
+            "title": "Comprehensive Visit Tracking",
+            "description": "Track all aspects of patient visits, from initial check-in to final discharge"
+        },
+        {
+            "title": "Point of Sale Integration",
+            "description": "Seamlessly integrate with existing Point of Sale systems for efficient payment processing"
+        }
+    ]
+}
