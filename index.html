@@ -30,10 +30,12 @@
 <body class="bg-gray-900 text-gray-200">
     <script src="js/components.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/projects.js"></script>
 
-    <main class="space-y-16">
+    <main>
         <section
-            class="hero min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-950 via-blue-950 to-gray-900">
+            class="hero min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-950 via-gray-800 to-gray-900 relative overflow-hidden">
+            <div class="absolute inset-0 bg-[url('assets/hero-bg.jpg')] bg-cover bg-center opacity-10"></div>
             <div class="container mx-auto px-6 text-center">
                 <h1 class="text-5xl sm:text-6xl font-bold mb-8 text-blue-400 animate-fadeInUp"
                     style="animation-delay: 0.2s;">Android Developer</h1>
@@ -60,15 +62,11 @@
         </section>
     </main>
 
-    <footer class="credits-footer bg-gray-800 p-4 mt-8">
-        <div class="container mx-auto">
-            <div id="credits-list" class="space-y-1 text-sm text-gray-300">
-                <!-- Credits will be dynamically inserted here by JavaScript -->
-            </div>
+    <div class="container mx-auto py-12">
+        <div id="credits-list" class="space-y-1 text-sm text-gray-300">
+            <!-- Credits will be dynamically inserted here by JavaScript -->
         </div>
-    </footer>
-
-    <script src="js/projects.js"></script>
+    </div>
 </body>
 
 </html>

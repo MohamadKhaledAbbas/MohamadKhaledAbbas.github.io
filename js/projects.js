@@ -82,7 +82,7 @@ class ProjectManager {
 
     createProjectCard(project) {
         const card = document.createElement('div');
-        card.className = 'project-card bg-gray-800 text-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-xl';
+        card.className = 'project-card bg-gray-700 text-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-xl';
         card.style.margin = '0 1rem'; // Add margin to prevent touching the edges
 
         if (project.featured) {
@@ -94,7 +94,7 @@ class ProjectManager {
 
         card.innerHTML = `
             <div class="relative">
-                <img src="${thumbnailPath}" alt="${project.title}" class="w-full h-48 object-cover" loading="lazy" onerror="this.onerror=null; this.src='${fallbackImage}'">
+                <img src="${thumbnailPath}" alt="${project.title}" class="w-full h-48 object-contain" loading="lazy" onerror="this.onerror=null; this.src='${fallbackImage}'">
                 ${project.featured ? '<span class="absolute top-2 right-2 bg-blue-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">Featured</span>' : ''}
             </div>
             <div class="p-4">
