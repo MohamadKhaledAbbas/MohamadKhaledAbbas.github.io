@@ -3,8 +3,6 @@
     "title": "Medical App",
     "shortDescription": "A medical app to help managing users medical records",
     "thumbnail": "thumbnail.png",
-    "version": "1.0.0",
-    "releaseDate": "2025-02",
     "technologies": [
         "Android Native",
         "Java",
