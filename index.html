@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,48 +9,58 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
+
         .animate-fadeInUp {
             animation: fadeInUp 1.2s ease-out forwards;
             animation-delay: 0.2s;
         }
     </style>
 </head>
+
 <body class="bg-gray-900 text-gray-200">
     <script src="js/components.js"></script>
     <script src="js/main.js"></script>
 
     <main class="space-y-16">
-        <section class="hero min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-950 via-blue-950 to-gray-900">
+        <section
+            class="hero min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-950 via-blue-950 to-gray-900">
             <div class="container mx-auto px-6 text-center">
-                <h1 class="text-5xl sm:text-6xl font-bold mb-8 text-blue-400 animate-fadeInUp" style="animation-delay: 0.2s;">Android Developer</h1>
-                <p class="text-xl sm:text-2xl mb-12 animate-fadeInUp" style="animation-delay: 0.4s;">Over 6 years of expertise in both Android Native and Cross-Platform development</p>
-                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 animate-fadeInUp" style="animation-delay: 0.6s;">
-                    <a href="#projects" class="btn bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full transition duration-300 transform hover:scale-105 shadow-lg">View Projects</a>
-                    <a href="contact.html" class="btn bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full transition duration-300 flex items-center justify-center transform hover:scale-105 shadow-lg" aria-label="Contact Me">
+                <h1 class="text-5xl sm:text-6xl font-bold mb-8 text-blue-400 animate-fadeInUp"
+                    style="animation-delay: 0.2s;">Android Developer</h1>
+                <p class="text-xl sm:text-2xl mb-12 animate-fadeInUp" style="animation-delay: 0.4s;">Over 6 years of
+                    expertise in both Android Native and Cross-Platform development</p>
+                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 animate-fadeInUp"
+                    style="animation-delay: 0.6s;">
+                    <a href="#projects"
+                        class="btn bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full transition duration-300 transform hover:scale-105 shadow-lg">View
+                        Projects</a>
+                    <a href="contact.html"
+                        class="btn bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full transition duration-300 flex items-center justify-center transform hover:scale-105 shadow-lg"
+                        aria-label="Contact Me">
                         <i class="fas fa-envelope mr-2" aria-hidden="true"></i>
                         <span>Get in Touch</span>
                     </a>
                 </div>
             </div>
         </section>
-        <section id="projects" class="py-12 bg-gray-800">
-            <div class="mx-auto max-w-screen-xl">
-                <h2 class="text-4xl font-bold mb-12 text-center text-blue-400">Featured Projects</h2>
-                <div id="projects-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-                    <!-- Project cards will be dynamically inserted here by JavaScript -->
-                </div>
-                <div class="text-center mt-12">
-                    <a href="projects.html" class="inline-block bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105 shadow-lg">
-                        View All Projects
-                    </a>
-                </div>
+        <section id="projects" class="py-12 bg-gray-800 w-full">
+            <div id="projects-container">
+                <!-- Project cards will be dynamically inserted here by JavaScript -->
             </div>
         </section>
     </main>
 
     <script src="js/projects.js"></script>
 </body>
+
 </html>

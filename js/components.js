@@ -1,39 +1,29 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     console.log('Components.js: DOM loaded');
     
-    // Load header
-    fetch('partials/header.html')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.text();
-        })
-        .then(data => {
-            document.querySelector('body').insertAdjacentHTML('afterbegin', data);
-            console.log('Components.js: Header inserted into DOM');
-            
-            // Initialize mobile menu immediately after header is inserted
-            const event = new CustomEvent('headerLoaded', { detail: { timestamp: Date.now() } });
-            document.dispatchEvent(event);
-        })
-        .catch(error => {
-            console.error('Components.js: Error loading header:', error);
-        });
+    try {
+        // Load header
+        const headerResponse = await fetch('partials/header.html');
+        if (!headerResponse.ok) throw new Error(`HTTP error! status: ${headerResponse.status}`);
+        const headerData = await headerResponse.text();
+        document.body.insertAdjacentHTML('afterbegin', headerData);
+        console.log('Components.js: Header inserted into DOM');
+        
+        // Dispatch headerLoaded event
+        document.dispatchEvent(new CustomEvent('headerLoaded', { detail: { timestamp: Date.now() } }));
 
-    // Load footer
-    fetch('partials/footer.html')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.text();
-        })
-        .then(data => {
-            document.querySelector('body').insertAdjacentHTML('beforeend', data);
-            console.log('Components.js: Footer inserted into DOM');
-        })
-        .catch(error => {
-            console.error('Components.js: Error loading footer:', error);
+        // Load footer
+        const footerResponse = await fetch('partials/footer.html');
+        if (!footerResponse.ok) throw new Error(`HTTP error! status: ${footerResponse.status}`);
+        const footerData = await footerResponse.text();
+        document.body.insertAdjacentHTML('beforeend', footerData);
+        console.log('Components.js: Footer inserted into DOM');
+
+        // Apply Tailwind classes to dynamically loaded content
+        document.querySelectorAll('header, footer').forEach(el => {
+            el.classList.add('w-full', 'bg-gray-900', 'text-white', 'shadow-lg');
         });
+    } catch (error) {
+        console.error('Components.js: Error loading components:', error);
+    }
 });

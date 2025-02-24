@@ -13,6 +13,19 @@
                 "MobX"
             ],
             "featured": true
+        },
+        {
+            "id": "bill-together2",
+            "title": "BillTogether",
+            "shortDescription": "A bill splitting app that helps groups manage expenses",
+            "thumbnail": "thumbnail.png",
+            "technologies": [
+                "Expo",
+                "Supabase",
+                "PostgreSQL",
+                "MobX"
+            ],
+            "featured": false
         }
     ]
 }

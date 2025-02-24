@@ -82,7 +82,6 @@ class ProjectManager {
     createProjectCard(project) {
         const card = document.createElement('div');
         card.className = 'project-card bg-gray-800 text-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-xl';
-        card.style.width = '100%';
         card.style.margin = '0 1rem'; // Add margin to prevent touching the edges
 
         if (project.featured) {
