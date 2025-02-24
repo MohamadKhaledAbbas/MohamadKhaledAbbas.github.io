@@ -28,11 +28,11 @@ class ProjectDetails {
         document.getElementById('project-description').textContent = project.shortDescription;
         
         if (project.releaseDate) {
-            document.getElementById('project-date').innerHTML = `<i class="far fa-calendar"></i> ${project.releaseDate}`;
+            document.getElementById('project-date').innerHTML = `<i class="far fa-calendar mr-2"></i>${project.releaseDate}`;
         }
         
         if (project.version) {
-            document.getElementById('project-version').innerHTML = `<i class="fas fa-code-branch"></i> v${project.version}`;
+            document.getElementById('project-version').innerHTML = `<i class="fas fa-code-branch mr-2"></i>v${project.version}`;
         }
 
         this.displayScreenshots(project.screenshots);
@@ -44,9 +44,9 @@ class ProjectDetails {
         if (project.features && project.features.length > 0) {
             const featuresContainer = document.getElementById('features-list');
             featuresContainer.innerHTML = project.features.map(feature => `
-                <div class="feature-card">
-                    <h3>${feature.title}</h3>
-                    <p>${feature.description}</p>
+                <div class="bg-gray-800 rounded-lg p-4 shadow-md">
+                    <h3 class="text-xl font-semibold mb-2 text-blue-400">${feature.title}</h3>
+                    <p class="text-gray-300">${feature.description}</p>
                 </div>
             `).join('');
         }
@@ -54,8 +54,8 @@ class ProjectDetails {
         if (project.downloads && project.downloads.length > 0) {
             const downloadContainer = document.getElementById('download-options');
             downloadContainer.innerHTML = project.downloads.map(download => `
-                <a href="${download.url}" class="btn btn-primary" target="_blank">
-                    <i class="fas fa-download"></i>
+                <a href="${download.url}" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300" target="_blank">
+                    <i class="fas fa-download mr-2"></i>
                     Download ${download.platform}
                 </a>
             `).join('');
@@ -67,126 +67,111 @@ class ProjectDetails {
 
         const container = document.getElementById('screenshots-container');
         container.innerHTML = screenshots.map((screenshot) => `
-            <div class="screenshot-item">
+            <div class="screenshot-item w-full cursor-pointer hover:opacity-80 transition-opacity duration-200">
                 <img src="../assets/projects/${this.projectId}/${screenshot.path}" 
                      alt="${screenshot.description || ''}"
+                     class="w-full h-auto object-cover rounded-lg shadow-md"
                      loading="lazy">
                 ${screenshot.description ? `
-                    <div class="screenshot-caption">
+                    <div class="mt-2 text-sm text-gray-300">
                         ${screenshot.description}
                     </div>
                 ` : ''}
             </div>
         `).join('');
 
-        // Create slider navigation
-        const sliderContainer = container.closest('.screenshot-slider');
-        
-        // Add navigation buttons
-        const prevBtn = document.createElement('button');
-        prevBtn.className = 'slider-nav prev';
-        prevBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
-        
-        const nextBtn = document.createElement('button');
-        nextBtn.className = 'slider-nav next';
-        nextBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
-        
-        sliderContainer.appendChild(prevBtn);
-        sliderContainer.appendChild(nextBtn);
+        // Create modal overlay
+        const modal = document.createElement('div');
+        modal.className = 'fixed inset-0 bg-black bg-opacity-90 hidden z-50';
+        modal.innerHTML = `
+            <div class="absolute top-4 right-4">
+                <button class="close-modal text-white text-3xl hover:text-gray-300 transition-colors duration-200">&times;</button>
+            </div>
+            <div class="flex items-center justify-center h-full relative">
+                <button class="nav-arrow left-arrow absolute left-4 bg-black bg-opacity-50 text-white p-3 rounded-full hover:bg-opacity-70 transition-all duration-200" style="left: 2rem">
+                    <i class="fas fa-chevron-left text-2xl"></i>
+                </button>
+                <img class="max-w-full max-h-full p-4" src="" alt="">
+                <button class="nav-arrow right-arrow absolute right-4 bg-black bg-opacity-50 text-white p-3 rounded-full hover:bg-opacity-70 transition-all duration-200" style="right: 2rem">
+                    <i class="fas fa-chevron-right text-2xl"></i>
+                </button>
+            </div>
+        `;
+        document.body.appendChild(modal);
 
-        // Add dot indicators
-        const dotsContainer = document.createElement('div');
-        dotsContainer.className = 'slider-dots';
-        screenshots.forEach((_, index) => {
-            const dot = document.createElement('button');
-            dot.className = `slider-dot ${index === 0 ? 'active' : ''}`;
-            dot.setAttribute('data-index', index);
-            dotsContainer.appendChild(dot);
-        });
-        sliderContainer.appendChild(dotsContainer);
-
-        // Initialize slider functionality
         let currentIndex = 0;
-        const totalSlides = screenshots.length;
-        const slideItems = container.querySelectorAll('.screenshot-item');
-        const dots = dotsContainer.querySelectorAll('.slider-dot');
 
-        const showSlide = (index) => {
-            // Handle circular navigation
-            if (index >= totalSlides) index = 0;
-            if (index < 0) index = totalSlides - 1;
-
-            // Update current index
+        const showImage = (index) => {
             currentIndex = index;
-
-            // Update transform
-            container.style.transform = `translateX(-${index * 100}%)`;
-
-            // Update active classes
-            slideItems.forEach((slide, i) => {
-                slide.classList.toggle('active', i === index);
-            });
-
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === index);
-            });
+            const imgSrc = screenshots[index].path;
+            const imgAlt = screenshots[index].description || '';
+            modal.querySelector('img').src = `../assets/projects/${this.projectId}/${imgSrc}`;
+            modal.querySelector('img').alt = imgAlt;
         };
 
-        // Add event listeners
-        prevBtn.addEventListener('click', () => showSlide(currentIndex - 1));
-        nextBtn.addEventListener('click', () => showSlide(currentIndex + 1));
-        dots.forEach((dot, index) => {
-            dot.addEventListener('click', () => showSlide(index));
+        // Add click handlers for screenshots
+        container.querySelectorAll('.screenshot-item').forEach((item, index) => {
+            item.addEventListener('click', () => {
+                currentIndex = index;
+                showImage(index);
+                modal.classList.remove('hidden');
+            });
         });
 
-        // Add touch support
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        container.addEventListener('touchstart', (e) => {
-            touchStartX = e.touches[0].clientX;
+        // Add navigation handlers
+        modal.querySelector('.left-arrow').addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentIndex = (currentIndex - 1 + screenshots.length) % screenshots.length;
+            showImage(currentIndex);
         });
 
-        container.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].clientX;
-            const diff = touchStartX - touchEndX;
-            
-            if (Math.abs(diff) > 50) { // Minimum swipe distance
-                if (diff > 0) {
-                    showSlide(currentIndex + 1);
-                } else {
-                    showSlide(currentIndex - 1);
-                }
+        modal.querySelector('.right-arrow').addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentIndex = (currentIndex + 1) % screenshots.length;
+            showImage(currentIndex);
+        });
+
+        // Add keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (modal.classList.contains('hidden')) return;
+
+            if (e.key === 'Escape') {
+                modal.classList.add('hidden');
+            } else if (e.key === 'ArrowLeft') {
+                currentIndex = (currentIndex - 1 + screenshots.length) % screenshots.length;
+                showImage(currentIndex);
+            } else if (e.key === 'ArrowRight') {
+                currentIndex = (currentIndex + 1) % screenshots.length;
+                showImage(currentIndex);
             }
         });
 
-        // Auto advance slides
-        let autoplayInterval = setInterval(() => showSlide(currentIndex + 1), 5000);
-
-        // Pause on hover
-        sliderContainer.addEventListener('mouseenter', () => {
-            clearInterval(autoplayInterval);
+        // Add close handler for modal
+        modal.querySelector('.close-modal').addEventListener('click', () => {
+            modal.classList.add('hidden');
         });
 
-        sliderContainer.addEventListener('mouseleave', () => {
-            autoplayInterval = setInterval(() => showSlide(currentIndex + 1), 5000);
+        // Close modal when clicking outside the image
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.add('hidden');
+            }
         });
     }
 
     showError(message) {
         const container = document.querySelector('.project-details-page .container');
         const errorDiv = document.createElement('div');
-        errorDiv.className = 'error-message';
+        errorDiv.className = 'bg-red-500 text-white p-4 rounded-lg shadow-md flex items-center';
         errorDiv.innerHTML = `
-            <i class="fas fa-exclamation-circle"></i>
-            <p>${message}</p>
+            <i class="fas fa-exclamation-circle mr-3 text-2xl"></i>
+            <p class="text-lg">${message}</p>
         `;
         container.innerHTML = '';
         container.appendChild(errorDiv);
     }
 }
 
-// Initialize project details when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     new ProjectDetails();
 });

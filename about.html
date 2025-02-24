@@ -1,71 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About - Khaled Abbas</title>
-    <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="css/about.css">
-    <link rel="stylesheet" href="css/utilities.css">
+    <link href="css/output.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-
-<body>
+<body class="bg-gray-900 text-gray-200">
     <script src="js/components.js"></script>
     <script src="js/main.js"></script>
 
-    <main class="about-section">
-        <div class="container">
-            <header class="about-header">
-                <div class="profile-container">
-                </div>
+    <main class="py-12">
+        <div class="container mx-auto px-4">
+            <header class="mb-12">
+                <div id="profile-container" class="text-center"></div>
             </header>
 
-            <section class="summary">
-                <h2>Professional Summary</h2>
-                <p>${profile.summary}</p>
+            <section id="summary" class="mb-12"></section>
+
+            <section id="education" class="mb-12"></section>
+
+            <section id="experience" class="mb-12">
+                <h2 class="text-3xl font-bold mb-6 text-blue-400">Work Experience</h2>
+                <div id="timeline" class="space-y-6"></div>
             </section>
 
-            <section class="education">
-                <h2>Education</h2>
-                <div class="education-card">
-                    <h3>${profile.education.degree}</h3>
-                    <p>${profile.education.university}</p>
-                    <p>GPA: ${profile.education.gpa}</p>
-                </div>
-            </section>
-
-            <section class="experience">
-                <h2>Work Experience</h2>
-                <div class="timeline">
-                    <!-- Experience items will be dynamically added here -->
-                </div>
-            </section>
-
-            <section class="skills-container">
-                <h2>Skills</h2>
-                <div class="skills-grid">
-                    <div class="technical-skills">
-                        <h3>Technical Skills</h3>
-                        <ul>
-                            <!-- Technical skills will be dynamically added here -->
-                        </ul>
+            <section id="skills" class="mb-12">
+                <h2 class="text-3xl font-bold mb-6 text-blue-400">Skills</h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div id="technical-skills">
+                        <h3 class="text-2xl font-semibold mb-4 text-blue-300">Technical Skills</h3>
                     </div>
-                    <div class="soft-skills">
-                        <h3>Soft Skills</h3>
-                        <ul>
-                            <!-- Soft skills will be dynamically added here -->
-                        </ul>
+                    <div id="soft-skills">
+                        <h3 class="text-2xl font-semibold mb-4 text-blue-300">Soft Skills</h3>
                     </div>
                 </div>
             </section>
 
-            <section class="languages">
-                <h2>Languages</h2>
-                <ul class="language-list">
-                    <!-- Languages will be dynamically added here -->
-                </ul>
+            <section id="languages">
+                <h2 class="text-3xl font-bold mb-6 text-blue-400">Languages</h2>
             </section>
         </div>
     </main>
@@ -76,127 +50,82 @@
                 const response = await fetch('assets/profile.json');
                 const profile = await response.json();
 
-                // Set profile image and populate profile container
-                const profileContainer = document.querySelector('.profile-container');
-                if (profileContainer) {
-                    profileContainer.innerHTML = `
-                        <div class="profile-image">
-                            <img src="${profile.imageUrl}" alt="${profile.name}" id="profile-img">
-                        </div>
-                        <h1 class="profile-name">About Me</h1>
-                        <div class="contact-info">
-                            <div class="contact-item">
-                                <i class="fas fa-envelope" aria-hidden="true"></i>
-                                <span>${profile.contact.email}</span>
-                            </div>
-                            <div class="contact-item">
-                                <i class="fab fa-linkedin" aria-hidden="true"></i>
-                                <a href="${profile.contact.linkedin}" target="_blank" rel="noopener noreferrer">LinkedIn Profile</a>
-                            </div>
-                        </div>
-                    `;
-                }
-
-                // Populate summary
-                const summarySection = document.querySelector('.summary');
-                summarySection.innerHTML = `
-                    <h2>Professional Summary</h2>
-                    <p class="summary-text">${profile.summary}</p>
+                document.getElementById('profile-container').innerHTML = `
+                    <img src="${profile.imageUrl}" alt="${profile.name}" class="w-40 h-40 rounded-full mx-auto mb-6 border-4 border-blue-500">
+                    <h1 class="text-4xl font-bold mb-4 text-blue-300">About Me</h1>
+                    <div class="space-y-3">
+                        <p><i class="fas fa-envelope mr-3 text-blue-400"></i>${profile.contact.email}</p>
+                        <p><i class="fab fa-linkedin mr-3 text-blue-400"></i><a href="${profile.contact.linkedin}" target="_blank" rel="noopener noreferrer" class="text-blue-300 hover:text-blue-500 transition duration-300">LinkedIn Profile</a></p>
+                    </div>
                 `;
 
-                // Populate education
-                const educationCard = document.querySelector('.education-card');
-                educationCard.innerHTML = `
-                    <h3 class="degree">${profile.education.degree}</h3>
-                    <p class="university">${profile.education.university}</p>
-                    <p class="gpa">GPA: <span>${profile.education.gpa}</span></p>
+                document.getElementById('summary').innerHTML = `
+                    <h2 class="text-3xl font-bold mb-4 text-blue-400">Professional Summary</h2>
+                    <p class="text-xl leading-relaxed">${profile.summary}</p>
                 `;
 
-                // Populate experience
-                const timeline = document.querySelector('.timeline');
+                document.getElementById('education').innerHTML = `
+                    <h2 class="text-3xl font-bold mb-4 text-blue-400">Education</h2>
+                    <div class="bg-gray-800 shadow-lg rounded-lg p-6 border border-blue-500">
+                        <h3 class="text-2xl font-semibold text-blue-300">${profile.education.degree}</h3>
+                        <p class="text-xl mt-2">${profile.education.university}</p>
+                        <p class="text-gray-400 mt-1">GPA: ${profile.education.gpa}</p>
+                    </div>
+                `;
+
+                const timeline = document.getElementById('timeline');
                 profile.experience.forEach(exp => {
                     const expElement = document.createElement('div');
-                    expElement.className = 'timeline-item';
+                    expElement.className = 'bg-gray-800 shadow-lg rounded-lg p-6 border border-blue-500';
                     expElement.innerHTML = `
-                        <div class="timeline-content">
-                            <h3>${exp.position}</h3>
-                            <h4>${exp.company} ${exp.location ? ' - ' + exp.location : ''}</h4>
-                            <p class="duration">${exp.duration}</p>
-                            <ul>
-                                ${exp.responsibilities.map(resp => `<li>${resp}</li>`).join('')}
-                            </ul>
-                        </div>
+                        <h3 class="text-2xl font-semibold text-blue-300">${exp.position}</h3>
+                        <h4 class="text-xl font-medium mt-2">${exp.company} ${exp.location ? ' - ' + exp.location : ''}</h4>
+                        <p class="text-gray-400 mt-1 mb-3">${exp.duration}</p>
+                        <ul class="list-disc pl-5 space-y-2 text-gray-300">
+                            ${exp.responsibilities.map(resp => `<li>${resp}</li>`).join('')}
+                        </ul>
                     `;
                     timeline.appendChild(expElement);
                 });
 
-                // Populate skills
-                // Populate technical skills
-                const technicalSkillsContainer = document.querySelector('.technical-skills');
-                const technicalSkillsList = document.createElement('div');
-                technicalSkillsList.className = 'skills-grid';
-
-                for (let i = 0; i < profile.skills.technical.length; i += 4) {
-                    const row = document.createElement('div');
-                    row.className = 'skills-row';
-
-                    for (let j = i; j < i + 4 && j < profile.skills.technical.length; j++) {
-                        const skill = profile.skills.technical[j];
-                        const skillItem = document.createElement('div');
-                        skillItem.className = 'skill-item';
-                        skillItem.innerHTML = `
-                            <span class="skill-name">${skill}</span>
-                            <div style="width: ${profile.skills.technical[skill]}%"></div>
-                        `;
-                        row.appendChild(skillItem);
-                    }
-
-                    technicalSkillsList.appendChild(row);
-                }
-
-                technicalSkillsContainer.appendChild(technicalSkillsList);
-
-                // Populate soft skills
-                const softSkillsContainer = document.querySelector('.soft-skills');
-                const softSkillsList = document.createElement('div');
-
-                for (let i = 0; i < profile.skills.soft.length; i += 4) {
-                    const row = document.createElement('div');
-                    row.className = 'skills-row';
-
-                    for (let j = i; j < i + 4 && j < profile.skills.soft.length; j++) {
-                        const skill = profile.skills.soft[j];
-                        const skillItem = document.createElement('div');
-                        skillItem.className = 'soft-skill-item';
-                        skillItem.innerHTML = `
-                            <span class="skill-name">${skill}</span>
-                            <div></div>
-                        `;
-                        row.appendChild(skillItem);
-                    }
-
-                    softSkillsList.appendChild(row);
-                }
-
-                softSkillsContainer.appendChild(softSkillsList);
-
-                // Populate languages
-                const languagesContainer = document.querySelector('.languages');
-                const languageList = document.createElement('ul');
-                languageList.className = 'language-list';
-                profile.languages.forEach(lang => {
-                    const li = document.createElement('div');
-                    li.className = 'language-item';
-                    li.innerHTML = `
-                        <span class="language-name">${lang.name}</span>
-                        <div class="language-level-bar">
-                            <div class="language-level-fill" style="width: ${lang.levelPercentage}%"></div>
-                        </div>
-                        <span class="language-level">${lang.level}</span>
-                    `;
-                    languageList.appendChild(li);
+                const technicalSkillsContainer = document.getElementById('technical-skills');
+                const technicalSkillsGrid = document.createElement('div');
+                technicalSkillsGrid.className = 'grid grid-cols-2 gap-4';
+                profile.skills.technical.forEach(skill => {
+                    const skillItem = document.createElement('div');
+                    skillItem.className = 'bg-gray-800 shadow-lg rounded p-3 text-center border border-blue-500 hover:bg-blue-900 transition duration-300';
+                    skillItem.textContent = skill;
+                    technicalSkillsGrid.appendChild(skillItem);
                 });
-                languagesContainer.appendChild(languageList);
+                technicalSkillsContainer.appendChild(technicalSkillsGrid);
+
+                const softSkillsContainer = document.getElementById('soft-skills');
+                const softSkillsGrid = document.createElement('div');
+                softSkillsGrid.className = 'grid grid-cols-2 gap-4';
+                profile.skills.soft.forEach(skill => {
+                    const skillItem = document.createElement('div');
+                    skillItem.className = 'bg-gray-800 shadow-lg rounded p-3 text-center border border-blue-500 hover:bg-blue-900 transition duration-300';
+                    skillItem.textContent = skill;
+                    softSkillsGrid.appendChild(skillItem);
+                });
+                softSkillsContainer.appendChild(softSkillsGrid);
+
+                const languagesContainer = document.getElementById('languages');
+                const languageGrid = document.createElement('div');
+                languageGrid.className = 'grid md:grid-cols-2 gap-4';
+                profile.languages.forEach(lang => {
+                    const langItem = document.createElement('div');
+                    langItem.className = 'bg-gray-800 shadow-lg rounded p-4 border border-blue-500';
+                    langItem.innerHTML = `
+                        <p class="font-semibold text-blue-300">${lang.name}</p>
+                        <div class="w-full bg-gray-700 rounded-full h-2.5 mt-2">
+                            <div class="bg-blue-500 h-2.5 rounded-full" style="width: ${lang.levelPercentage}%"></div>
+                        </div>
+                        <p class="text-sm text-gray-400 mt-1">${lang.level}</p>
+                    `;
+                    languageGrid.appendChild(langItem);
+                });
+                languagesContainer.appendChild(languageGrid);
 
             } catch (error) {
                 console.error('Error loading profile:', error);
@@ -206,5 +135,4 @@
         document.addEventListener('DOMContentLoaded', loadProfile);
     </script>
 </body>
-
 </html>

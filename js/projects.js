@@ -29,13 +29,13 @@ class ProjectManager {
 
     setupFilters() {
         const filterContainer = document.createElement('div');
-        filterContainer.className = 'project-filters';
+        filterContainer.className = 'flex flex-wrap justify-center gap-3 mb-10';
         
         const filters = ['all', ...new Set(this.projects.flatMap(p => p.technologies))];
         
         filters.forEach(filter => {
             const button = document.createElement('button');
-            button.className = 'filter-btn' + (filter === 'all' ? ' active' : '');
+            button.className = `px-6 py-3 rounded-full text-base font-medium transition-colors duration-300 ease-in-out ${filter === 'all' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-blue-600 hover:text-white'}`;
             button.textContent = filter.charAt(0).toUpperCase() + filter.slice(1);
             button.addEventListener('click', () => this.filterProjects(filter));
             filterContainer.appendChild(button);
@@ -48,7 +48,7 @@ class ProjectManager {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in');
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
                     observer.unobserve(entry.target);
                 }
             });
@@ -57,6 +57,7 @@ class ProjectManager {
         });
 
         this.projectsContainer.querySelectorAll('.project-card').forEach(card => {
+            card.classList.add('opacity-0', 'translate-y-6', 'transition-all', 'duration-700', 'ease-out');
             observer.observe(card);
         });
     }
@@ -64,7 +65,12 @@ class ProjectManager {
     filterProjects(filter) {
         this.currentFilter = filter;
         const buttons = document.querySelectorAll('.filter-btn');
-        buttons.forEach(btn => btn.classList.toggle('active', btn.textContent.toLowerCase() === filter));
+        buttons.forEach(btn => {
+            btn.classList.toggle('bg-blue-600', btn.textContent.toLowerCase() === filter);
+            btn.classList.toggle('text-white', btn.textContent.toLowerCase() === filter);
+            btn.classList.toggle('bg-gray-200', btn.textContent.toLowerCase() !== filter);
+            btn.classList.toggle('text-gray-700', btn.textContent.toLowerCase() !== filter);
+        });
 
         const filteredProjects = filter === 'all' 
             ? this.projects 
@@ -75,43 +81,43 @@ class ProjectManager {
 
     createProjectCard(project) {
         const card = document.createElement('div');
-        card.className = 'project-card';
+        card.className = 'project-card bg-gray-800 text-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-xl';
+        card.style.width = '100%';
+        card.style.margin = '0 1rem'; // Add margin to prevent touching the edges
+
         if (project.featured) {
-            card.classList.add('featured');
+            card.classList.add('border-2', 'border-blue-500');
         }
 
         const thumbnailPath = `/assets/projects/${project.id}/${project.thumbnail}`;
         const fallbackImage = '/assets/images/project-placeholder.jpg';
 
         card.innerHTML = `
-            <div class="project-thumbnail">
-                <img src="${thumbnailPath}" alt="${project.title}" 
-                     loading="lazy"
-                     onerror="this.onerror=null; this.src='${fallbackImage}'">
-                ${project.featured ? '<span class="featured-badge">Featured</span>' : ''}
+            <div class="relative">
+                <img src="${thumbnailPath}" alt="${project.title}" class="w-full h-48 object-cover" loading="lazy" onerror="this.onerror=null; this.src='${fallbackImage}'">
+                ${project.featured ? '<span class="absolute top-2 right-2 bg-blue-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">Featured</span>' : ''}
             </div>
-            <div class="project-info">
-                <h3>${project.title}</h3>
-                <p>${project.shortDescription}</p>
-                <div class="tech-stack">
+            <div class="p-4">
+                <h3 class="text-lg font-bold mb-2">${project.title}</h3>
+                <p class="text-gray-400 mb-3 text-sm">${project.shortDescription}</p>
+                <div class="flex flex-wrap gap-2 mb-3">
                     ${project.technologies.map(tech => `
-                        <span class="tech-item" data-tech="${tech}">${tech}</span>
+                        <span class="tech-item text-xs font-medium px-2 py-0.5 rounded-full bg-gray-700 text-gray-300 cursor-pointer hover:bg-blue-500 hover:text-white transition-colors duration-300" data-tech="${tech}">${tech}</span>
                     `).join('')}
                 </div>
-                <div class="project-actions">
-                    <a href="./project-details.html?id=${project.id}" class="btn btn-primary">
-                        <i class="fas fa-info-circle"></i> Details
+                <div class="flex gap-2">
+                    <a href="./project-details.html?id=${project.id}" class="btn-primary text-sm px-4 py-1.5 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors duration-300">
+                        <i class="fas fa-info-circle mr-1"></i> Details
                     </a>
                     ${project.demoUrl ? `
-                        <a href="${project.demoUrl}" class="btn btn-outline" target="_blank">
-                            <i class="fas fa-external-link-alt"></i> Demo
+                        <a href="${project.demoUrl}" class="btn-outline text-sm px-4 py-1.5 bg-transparent border border-gray-500 text-gray-300 rounded hover:bg-gray-700 hover:border-gray-700 transition-colors duration-300" target="_blank">
+                            <i class="fas fa-external-link-alt mr-1"></i> Demo
                         </a>
                     ` : ''}
                 </div>
             </div>
         `;
 
-        // Add hover effect for tech tags
         card.querySelectorAll('.tech-item').forEach(tag => {
             tag.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -124,22 +130,28 @@ class ProjectManager {
 
     async displayProjects(projectsToDisplay = this.projects) {
         if (!this.projectsContainer) return;
-        
-        this.projectsContainer.innerHTML = '';
-        
-        if (projectsToDisplay.length === 0) {
-            this.showError('No projects found.');
-            return;
+
+        const projects = this.currentFilter === 'all' 
+            ? this.projects 
+            : this.projects.filter(p => p.technologies.includes(this.currentFilter));
+
+        const featuredProjects = projects.filter(p => p.featured);
+        const regularProjects = projects.filter(p => !p.featured);
+
+        const projectGrid = document.createElement('div');
+        projectGrid.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6';
+
+        if (projects.length === 1) {
+            projectGrid.className = 'flex justify-center';
         }
 
-        const featuredProjects = projectsToDisplay.filter(p => p.featured);
-        const regularProjects = projectsToDisplay.filter(p => !p.featured);
-        
         [...featuredProjects, ...regularProjects].forEach(project => {
             const card = this.createProjectCard(project);
-            this.projectsContainer.appendChild(card);
+            projectGrid.appendChild(card);
         });
 
+        this.projectsContainer.innerHTML = '';
+        this.projectsContainer.appendChild(projectGrid);
         this.setupAnimations();
     }
 
@@ -147,9 +159,9 @@ class ProjectManager {
         if (!this.projectsContainer) return;
         
         const errorDiv = document.createElement('div');
-        errorDiv.className = 'error-message';
+        errorDiv.className = 'bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4 text-md';
         errorDiv.innerHTML = `
-            <i class="fas fa-exclamation-circle"></i>
+            <i class="fas fa-exclamation-circle mr-2"></i>
             <p>${message}</p>
         `;
         
@@ -158,7 +170,6 @@ class ProjectManager {
     }
 }
 
-// Initialize project manager when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     new ProjectManager();
 });
