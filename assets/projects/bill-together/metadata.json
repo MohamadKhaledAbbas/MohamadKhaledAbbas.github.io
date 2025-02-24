@@ -48,19 +48,28 @@
     ],
     "features": [
         {
-            "title": "Feature 1",
-            "description": "Detailed description of feature 1"
+            "title": "Easy Bill Creation",
+            "description": "Create and manage bills effortlessly for your groups or personal expenses"
         },
         {
-            "title": "Feature 2",
-            "description": "Detailed description of feature 2"
+            "title": "Flexible Group Management",
+            "description": "Create groups, add members, and organize your shared expenses seamlessly"
         },
         {
-            "title": "Feature 3",
-            "description": "Detailed description of feature 3"
+            "title": "Customizable Splitting Options",
+            "description": "Split bills equally, by percentage, or with custom amounts to suit any situation"
+        },
+        {
+            "title": "Clear Financial Overview",
+            "description": "View a comprehensive dashboard of what you owe and what others owe you"
+        },
+        {
+            "title": "Secure Settlement Process",
+            "description": "Ensure all debts are properly settled with a user acknowledgment system"
+        },
+        {
+            "title": "Bill Protection",
+            "description": "Prevent accidental deletions with a lock on unsettled bills"
         }
-    ],
-    "downloads": {
-        "apk": "downloads/app-v1.0.0.apk"
-    }
+    ]
 }
