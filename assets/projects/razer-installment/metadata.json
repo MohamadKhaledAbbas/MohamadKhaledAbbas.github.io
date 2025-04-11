@@ -11,11 +11,11 @@
     ],
     "screenshots": [
         {
-            "path": "screenshots/Installment_Sale.png",
+            "path": "screenshots/Installment_Sale_Receipt.png",
             "description": "Installment Sale"
         },
         {
-            "path": "screenshots/Installment_Void.png",
+            "path": "screenshots/Installment_Void_Receipt.png",
             "description": "Installment Void"
         },
         {
